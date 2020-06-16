@@ -30,10 +30,11 @@ outputs:
         - {{ name }}-us
         - {{ name }}-za
     test:
+      requires:
+        - hunspell
+        - python >=3.6
       commands:
-        - hunspell -D
-        - echo 'test' | hunspell
-        - echo 'mispellled' | hunspell
+        - cd {{ RECIPE_DIR }} && python hunspell_test.py
 
   - name: {{ name }}-au
     build:
@@ -45,10 +46,9 @@ outputs:
     test:
       requires:
         - hunspell
+        - python >=3.6
       commands:
-        - hunspell -D
-        - echo 'test' | hunspell
-        - echo 'mispellled' | hunspell
+        - cd {{ RECIPE_DIR }} && python hunspell_test.py
 
   - name: {{ name }}-ca
     build:
@@ -60,10 +60,9 @@ outputs:
     test:
       requires:
         - hunspell
+        - python >=3.6
       commands:
-        - hunspell -D
-        - echo 'test' | hunspell
-        - echo 'mispellled' | hunspell
+        - cd {{ RECIPE_DIR }} && python hunspell_test.py
 
   - name: {{ name }}-gb
     build:
@@ -75,10 +74,9 @@ outputs:
     test:
       requires:
         - hunspell
+        - python >=3.6
       commands:
-        - hunspell -D
-        - echo 'test' | hunspell
-        - echo 'mispellled' | hunspell
+        - cd {{ RECIPE_DIR }} && python hunspell_test.py
 
   - name: {{ name }}-us
     build:
@@ -90,10 +88,9 @@ outputs:
     test:
       requires:
         - hunspell
+        - python >=3.6
       commands:
-        - hunspell -D
-        - echo 'test' | hunspell
-        - echo 'mispellled' | hunspell
+        - cd {{ RECIPE_DIR }} && python hunspell_test.py
 
   - name: {{ name }}-za
     build:
@@ -105,10 +102,9 @@ outputs:
     test:
       requires:
         - hunspell
+        - python >=3.6
       commands:
-        - hunspell -D
-        - echo 'test' | hunspell
-        - echo 'mispellled' | hunspell
+        - cd {{ RECIPE_DIR }} && python hunspell_test.py
 
 about:
   home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
