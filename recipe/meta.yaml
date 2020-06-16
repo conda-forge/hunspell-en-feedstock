@@ -31,6 +31,7 @@ outputs:
         - {{ name }}-za
     test:
       commands:
+        - hunspell -D
         - echo 'test' | hunspell
         - echo 'mispellled' | hunspell
 
@@ -45,6 +46,7 @@ outputs:
       requires:
         - hunspell
       commands:
+        - hunspell -D
         - echo 'test' | hunspell
         - echo 'mispellled' | hunspell
 
@@ -59,6 +61,7 @@ outputs:
       requires:
         - hunspell
       commands:
+        - hunspell -D
         - echo 'test' | hunspell
         - echo 'mispellled' | hunspell
 
@@ -73,6 +76,7 @@ outputs:
       requires:
         - hunspell
       commands:
+        - hunspell -D
         - echo 'test' | hunspell
         - echo 'mispellled' | hunspell
 
@@ -87,6 +91,7 @@ outputs:
       requires:
         - hunspell
       commands:
+        - hunspell -D
         - echo 'test' | hunspell
         - echo 'mispellled' | hunspell
 
@@ -101,6 +106,7 @@ outputs:
       requires:
         - hunspell
       commands:
+        - hunspell -D
         - echo 'test' | hunspell
         - echo 'mispellled' | hunspell
 

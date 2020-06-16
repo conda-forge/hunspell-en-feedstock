@@ -16,3 +16,5 @@ for glob in ["*.aff", "*.dic", "README*"]:
             shutil.copy2(path, SRC / path.name)
         else:
             shutil.copy2(path, OUT / path.name)
+
+print(sorted(OUT.glob("*")))
