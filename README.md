@@ -5,11 +5,9 @@ Home:
 
 Package license: MIT
 
-Feedstock license: BSD 3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/hunspell-en-feedstock/blob/master/LICENSE.txt)
 
 Summary: 
-
-
 
 Current build status
 ====================
@@ -121,6 +119,6 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@bollwvyl](https://github.com/bollwvyl/)
+* [@bollwyvl](https://github.com/bollwyvl/)
 * [@scopatz](https://github.com/scopatz/)
 
