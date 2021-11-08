@@ -10,7 +10,7 @@ source:
   sha256: 02fca6f1d4218c37769fb10f87c30bc5e7cf49716fa07b592874a9ef1edb4f72
 
 build:
-  number: 1
+  number: 2
   noarch: generic
 
 requirements:
