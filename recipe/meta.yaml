@@ -12,6 +12,8 @@ source:
 build:
   number: 2
   noarch: generic
+  ignore_run_exports:
+    - python
 
 requirements:
   build:
