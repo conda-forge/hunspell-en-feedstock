@@ -1,5 +1,5 @@
 {% set name = "aoo-mozilla-en-dict" %}
-{% set version = "2020-06-01" %}
+{% set version = "2022-08-01" %}
 
 package:
   name: {{ name }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/marcoagpinto/{{ name }}/archive/{{ version }}gb.tar.gz
-  sha256: 02fca6f1d4218c37769fb10f87c30bc5e7cf49716fa07b592874a9ef1edb4f72
+  sha256: 9abdd8adc9a0dc62c8f0a44a10264dbe1ec2bbf6a3916884476c674c6fe030d9
 
 build:
-  number: 2
+  number: 0
   noarch: generic
 
 requirements:
