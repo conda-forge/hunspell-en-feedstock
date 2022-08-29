@@ -1,5 +1,5 @@
 {% set name = "aoo-mozilla-en-dict" %}
-{% set version = "2020-06-01" %}
+{% set version = "2022-08-01" %}
 
 package:
   name: {{ name }}
@@ -7,11 +7,13 @@ package:
 
 source:
   url: https://github.com/marcoagpinto/{{ name }}/archive/{{ version }}gb.tar.gz
-  sha256: 02fca6f1d4218c37769fb10f87c30bc5e7cf49716fa07b592874a9ef1edb4f72
+  sha256: 9abdd8adc9a0dc62c8f0a44a10264dbe1ec2bbf6a3916884476c674c6fe030d9
 
 build:
-  number: 1
+  number: 0
   noarch: generic
+  ignore_run_exports:
+    - python
 
 requirements:
   build:
@@ -21,6 +23,8 @@ outputs:
   - name: hunspell-en
     build:
       noarch: generic
+      ignore_run_exports:
+        - python
     requirements:
       run:
         - hunspell
@@ -39,6 +43,8 @@ outputs:
   - name: {{ name }}-au
     build:
       noarch: generic
+      ignore_run_exports:
+        - python
     script: copy_files.py
     about:
       license: MIT
@@ -53,6 +59,8 @@ outputs:
   - name: {{ name }}-ca
     build:
       noarch: generic
+      ignore_run_exports:
+        - python
     script: copy_files.py
     about:
       license: MIT
@@ -67,6 +75,8 @@ outputs:
   - name: {{ name }}-gb
     build:
       noarch: generic
+      ignore_run_exports:
+        - python
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
@@ -95,6 +105,8 @@ outputs:
   - name: {{ name }}-za
     build:
       noarch: generic
+      ignore_run_exports:
+        - python
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
