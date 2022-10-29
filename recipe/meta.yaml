@@ -10,7 +10,7 @@ source:
   sha256: 9abdd8adc9a0dc62c8f0a44a10264dbe1ec2bbf6a3916884476c674c6fe030d9
 
 build:
-  number: 0
+  number: 1
   noarch: generic
   ignore_run_exports:
     - python
