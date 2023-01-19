@@ -32,11 +32,13 @@ outputs:
         - {{ name }}-us
         - {{ name }}-za
     test:
+      files:
+        - hunspell_test.py
       requires:
         - hunspell
         - python >=3.6
       commands:
-        - cd {{ RECIPE_DIR }} && python hunspell_test.py
+        - python hunspell_test.py
 
   - name: {{ name }}-au
     build:
@@ -46,11 +48,13 @@ outputs:
       license: MIT
       license_file: README_en_AU.txt
     test:
+      files:
+        - hunspell_test.py
       requires:
         - hunspell
         - python >=3.6
       commands:
-        - cd {{ RECIPE_DIR }} && python hunspell_test.py
+        - python hunspell_test.py
 
   - name: {{ name }}-ca
     build:
@@ -60,11 +64,13 @@ outputs:
       license: MIT
       license_file: README_en_CA.txt
     test:
+      files:
+        - hunspell_test.py
       requires:
         - hunspell
         - python >=3.6
       commands:
-        - cd {{ RECIPE_DIR }} && python hunspell_test.py
+        - python hunspell_test.py
 
   - name: {{ name }}-gb
     build:
@@ -74,11 +80,13 @@ outputs:
       license: LGPL-3.0-or-later
       license_file: README_en_GB.txt
     test:
+      files:
+        - hunspell_test.py
       requires:
         - hunspell
         - python >=3.6
       commands:
-        - cd {{ RECIPE_DIR }} && python hunspell_test.py
+        - python hunspell_test.py
 
   - name: {{ name }}-us
     build:
@@ -88,11 +96,13 @@ outputs:
       license: MIT
       license_file: README_en_US.txt
     test:
+      files:
+        - hunspell_test.py
       requires:
         - hunspell
         - python >=3.6
       commands:
-        - cd {{ RECIPE_DIR }} && python hunspell_test.py
+        - python hunspell_test.py
 
   - name: {{ name }}-za
     build:
@@ -102,11 +112,13 @@ outputs:
       license: LGPL-3.0-or-later
       license_file: README_en_ZA.txt
     test:
+      files:
+        - hunspell_test.py
       requires:
         - hunspell
         - python >=3.6
       commands:
-        - cd {{ RECIPE_DIR }} && python hunspell_test.py
+        - python hunspell_test.py
 
 about:
   home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
