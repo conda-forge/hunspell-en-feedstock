@@ -32,11 +32,12 @@ def hunspell(word, expected, locale):
 
 
 @pytest.mark.parametrize("locale", LOCALES)
-def test_locale(locale):
+def test_locale_found(locale):
     print(f"Checking if the {locale} dictionary is detected...")
     p = subprocess.Popen(["hunspell", "-D"], stderr=subprocess.PIPE)
     out, err = p.communicate()
     dicts = err.decode("utf-8")
+
     l10n_dict = OUT / locale
 
     print(l10n_dict)

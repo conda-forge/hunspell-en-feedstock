@@ -38,7 +38,7 @@ outputs:
         - pytest
         - python >=3.6
       commands:
-        - pytest -vv test_hunspell.py
+        - pytest -vv -s test_hunspell.py
 
   - name: aoo-mozilla-en-dict-au
     build: *build
