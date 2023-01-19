@@ -151,6 +151,3 @@ Feedstock Maintainers
 * [@bollwyvl](https://github.com/bollwyvl/)
 * [@scopatz](https://github.com/scopatz/)
 
-
-<!-- dummy commit to enable rerendering -->
-
