@@ -1,4 +1,4 @@
-import os, sys, shutil
+import os, shutil
 from pathlib import Path
 
 SRC = Path(os.environ["SRC_DIR"])
@@ -11,8 +11,8 @@ L10N = PKG.split("-")[-1].upper()
 PATH = next(SRC.glob(f"en_{L10N}*"))
 
 for glob in ["*.aff", "*.dic", "README*"]:
-    for path in PATH.glob(glob):
-        print(path.name)
+    for path in sorted(PATH.glob(glob)):
+        print("Copying", path.name)
         shutil.copy2(path, OUT / path.name)
         if path.name.startswith("README"):
             shutil.copy2(path, SRC / path.name)

@@ -32,12 +32,13 @@ outputs:
         - aoo-mozilla-en-dict-za
     test: &test
       files:
-        - hunspell_test.py
+        - test_hunspell.py
       requires:
         - hunspell
+        - pytest
         - python >=3.6
       commands:
-        - python hunspell_test.py
+        - pytest -vv test_hunspell.py
 
   - name: aoo-mozilla-en-dict-au
     build: *build
