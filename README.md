@@ -1,5 +1,5 @@
-About aoo-mozilla-en-dict
-=========================
+About hunspell-en
+=================
 
 Home: 
 
@@ -34,10 +34,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-aoo--mozilla--en--dict--za-green.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/aoo-mozilla-en-dict-za.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/aoo-mozilla-en-dict-za.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/aoo-mozilla-en-dict-za.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-hunspell--en-green.svg)](https://anaconda.org/conda-forge/hunspell-en) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/hunspell-en.svg)](https://anaconda.org/conda-forge/hunspell-en) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/hunspell-en.svg)](https://anaconda.org/conda-forge/hunspell-en) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/hunspell-en.svg)](https://anaconda.org/conda-forge/hunspell-en) |
 
-Installing aoo-mozilla-en-dict
-==============================
+Installing hunspell-en
+======================
 
-Installing `aoo-mozilla-en-dict` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `hunspell-en` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -123,17 +123,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating aoo-mozilla-en-dict-feedstock
-======================================
+Updating hunspell-en-feedstock
+==============================
 
-If you would like to improve the aoo-mozilla-en-dict recipe or build a new
+If you would like to improve the hunspell-en recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/aoo-mozilla-en-dict-feedstock are
+Note that all branches in the conda-forge/hunspell-en-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
