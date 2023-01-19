@@ -1,37 +1,36 @@
-{% set name = "aoo-mozilla-en-dict" %}
-{% set version = "2022-08-01" %}
+{% set version = "2023-01-01" %}
 
 package:
-  name: {{ name }}
+  name: aoo-mozilla-en-dict
   version: {{ version.replace("-", ".") }}
 
 source:
-  url: https://github.com/marcoagpinto/{{ name }}/archive/{{ version }}gb.tar.gz
-  sha256: 9abdd8adc9a0dc62c8f0a44a10264dbe1ec2bbf6a3916884476c674c6fe030d9
+  url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/{{ version }}gb.tar.gz
+  sha256: 2a105ee49030fd8723efcd74f44f3f1eceed2968f7255d17ad35b5aafa8b5f71
 
 build:
-  number: 1
+  number: 0
   noarch: generic
   merge_build_host: False
 
 requirements:
   build:
     - python >=3.6
-  host:
+  host: []
 
 outputs:
   - name: hunspell-en
-    build:
+    build: &build
       noarch: generic
     requirements:
       run:
         - hunspell
-        - {{ name }}-au
-        - {{ name }}-ca
-        - {{ name }}-gb
-        - {{ name }}-us
-        - {{ name }}-za
-    test:
+        - aoo-mozilla-en-dict-au
+        - aoo-mozilla-en-dict-ca
+        - aoo-mozilla-en-dict-gb
+        - aoo-mozilla-en-dict-us
+        - aoo-mozilla-en-dict-za
+    test: &test
       files:
         - hunspell_test.py
       requires:
@@ -40,93 +39,54 @@ outputs:
       commands:
         - python hunspell_test.py
 
-  - name: {{ name }}-au
-    build:
-      noarch: generic
+  - name: aoo-mozilla-en-dict-au
+    build: *build
     script: copy_files.py
+    test: *test
     about:
       license: MIT
-      license_file: README_en_AU.txt
-    test:
-      files:
-        - hunspell_test.py
-      requires:
-        - hunspell
-        - python >=3.6
-      commands:
-        - python hunspell_test.py
+      license_file: en_AU (Kevin Atkinson)/README_en_AU.txt
 
-  - name: {{ name }}-ca
-    build:
-      noarch: generic
+  - name: aoo-mozilla-en-dict-ca
+    build: *build
     script: copy_files.py
+    test: *test
     about:
       license: MIT
-      license_file: README_en_CA.txt
-    test:
-      files:
-        - hunspell_test.py
-      requires:
-        - hunspell
-        - python >=3.6
-      commands:
-        - python hunspell_test.py
+      license_file: en_CA (Kevin Atkinson)/README_en_CA.txt
 
-  - name: {{ name }}-gb
-    build:
-      noarch: generic
+  - name: aoo-mozilla-en-dict-gb
+    build: *build
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
-      license_file: README_en_GB.txt
-    test:
-      files:
-        - hunspell_test.py
-      requires:
-        - hunspell
-        - python >=3.6
-      commands:
-        - python hunspell_test.py
+      license_file: en_GB (Marco Pinto)/README_en_GB.txt
+    test: *test
 
-  - name: {{ name }}-us
-    build:
-      noarch: generic
+  - name: aoo-mozilla-en-dict-us
+    build: *build
     script: copy_files.py
     about:
       license: MIT
-      license_file: README_en_US.txt
-    test:
-      files:
-        - hunspell_test.py
-      requires:
-        - hunspell
-        - python >=3.6
-      commands:
-        - python hunspell_test.py
+      license_file: en_US (Kevin Atkinson)/README_en_US.txt
+    test: *test
 
-  - name: {{ name }}-za
-    build:
-      noarch: generic
+  - name: aoo-mozilla-en-dict-za
+    build: *build
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
-      license_file: README_en_ZA.txt
-    test:
-      files:
-        - hunspell_test.py
-      requires:
-        - hunspell
-        - python >=3.6
-      commands:
-        - python hunspell_test.py
+      license_file: en_ZA (Dwayne Bailey)/README_en_ZA.txt
+    test: *test
 
 about:
   home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
   summary: 'English Dictionaries Project (AOO+Mozilla+others)'
   license: LGPL-3.0-or-later
-  license_file: README_en_GB.txt
+  license_file: README.md
 
 extra:
+  feedstock-name: hunspell-en
   recipe-maintainers:
     - scopatz
     - bollwyvl
