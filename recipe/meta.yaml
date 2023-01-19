@@ -12,19 +12,17 @@ source:
 build:
   number: 0
   noarch: generic
-  ignore_run_exports:
-    - python
+  merge_build_host: False
 
 requirements:
   build:
     - python >=3.6
+  host:
 
 outputs:
   - name: hunspell-en
     build:
       noarch: generic
-      ignore_run_exports:
-        - python
     requirements:
       run:
         - hunspell
@@ -43,8 +41,6 @@ outputs:
   - name: {{ name }}-au
     build:
       noarch: generic
-      ignore_run_exports:
-        - python
     script: copy_files.py
     about:
       license: MIT
@@ -59,8 +55,6 @@ outputs:
   - name: {{ name }}-ca
     build:
       noarch: generic
-      ignore_run_exports:
-        - python
     script: copy_files.py
     about:
       license: MIT
@@ -75,8 +69,6 @@ outputs:
   - name: {{ name }}-gb
     build:
       noarch: generic
-      ignore_run_exports:
-        - python
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
@@ -105,8 +97,6 @@ outputs:
   - name: {{ name }}-za
     build:
       noarch: generic
-      ignore_run_exports:
-        - python
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
