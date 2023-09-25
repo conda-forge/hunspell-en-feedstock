@@ -1,13 +1,52 @@
-About hunspell-en
-=================
-
-Home: 
-
-Package license: MIT
+About hunspell-en-feedstock
+===========================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/hunspell-en-feedstock/blob/main/LICENSE.txt)
 
-Summary: 
+
+About hunspell-en
+-----------------
+
+Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
+Package license: LGPL-3.0-or-later
+
+Summary: English Dictionaries Project (AOO+Mozilla+others)
+
+About aoo-mozilla-en-dict-au
+----------------------------
+
+
+
+Package license: MIT
+
+About aoo-mozilla-en-dict-ca
+----------------------------
+
+
+
+Package license: MIT
+
+About aoo-mozilla-en-dict-gb
+----------------------------
+
+
+
+Package license: LGPL-3.0-or-later
+
+About aoo-mozilla-en-dict-us
+----------------------------
+
+
+
+Package license: MIT
+
+About aoo-mozilla-en-dict-za
+----------------------------
+
+
+
+Package license: LGPL-3.0-or-later
 
 Current build status
 ====================
