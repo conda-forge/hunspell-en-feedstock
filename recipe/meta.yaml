@@ -9,7 +9,7 @@ source:
   sha256: 2a105ee49030fd8723efcd74f44f3f1eceed2968f7255d17ad35b5aafa8b5f71
 
 build:
-  number: 0
+  number: 1
   noarch: generic
   merge_build_host: False
 
