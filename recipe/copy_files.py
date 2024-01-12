@@ -8,7 +8,7 @@ OUT = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
 
 PKG = os.environ["PKG_NAME"]
 L10N = PKG.split("-")[-1].upper()
-PATH = next(SRC.glob(f"en_{L10N}*"))
+PATH = sorted(SRC.glob(f"en_{L10N}*"))[0]
 GLOBS = ["*.aff", "*.dic"]
 
 
@@ -17,16 +17,19 @@ def copy_files():
         print(PATH, "does not exist")
         return 1
 
+    print("\n".join(sorted(map(str, PATH.glob("*")))))
+
     print("Copying files to", OUT)
 
-    all_files = sorted(sum([[*PATH.glob(glob)] for glob in GLOBS], []))
+    dict_files = sorted(sum([[*PATH.glob(glob)] for glob in GLOBS], []))
 
-    if not all_files:
+    if not dict_files:
+        PATH.glob("*")
         return 1
 
     OUT.mkdir(exist_ok=True, parents=True)
 
-    for path in all_files:
+    for path in dict_files:
         print("...", path.name)
         shutil.copy2(path, OUT / path.name)
 
