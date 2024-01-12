@@ -1,4 +1,4 @@
-{% set version = "2023-01-01" %}
+{% set version = "2024-01-01" %}
 
 package:
   name: aoo-mozilla-en-dict
@@ -6,12 +6,15 @@ package:
 
 source:
   url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/{{ version }}gb.tar.gz
-  sha256: 2a105ee49030fd8723efcd74f44f3f1eceed2968f7255d17ad35b5aafa8b5f71
+  sha256: 37759710c23d7ad9414fee640f72a3a1d36fb5755f6ffb064f336866c070da55
 
 build:
-  number: 1
+  number: 0
   noarch: generic
   merge_build_host: False
+  ignore_run_exports:
+    - python
+    - python_abi
 
 requirements:
   build:
