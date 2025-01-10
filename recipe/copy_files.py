@@ -4,7 +4,8 @@ import sys
 from pathlib import Path
 
 SRC = Path(os.environ["SRC_DIR"])
-OUT = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
+OUT = Path(os.environ["PREFIX"]) / "share/hunspell"
+OUT_LEGACY = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
 
 PKG = os.environ["PKG_NAME"]
 L10N = PKG.split("-")[-1].upper()
@@ -19,19 +20,17 @@ def copy_files():
 
     print("\n".join(sorted(map(str, PATH.glob("*")))))
 
-    print("Copying files to", OUT)
-
     dict_files = sorted(sum([[*PATH.glob(glob)] for glob in GLOBS], []))
 
     if not dict_files:
         PATH.glob("*")
         return 1
 
-    OUT.mkdir(exist_ok=True, parents=True)
-
-    for path in dict_files:
-        print("...", path.name)
-        shutil.copy2(path, OUT / path.name)
+    for out in [OUT, OUT_LEGACY]:
+        out.mkdir(exist_ok=True, parents=True)
+        for path in dict_files:
+            print("Copying file to", out / path.name)
+            shutil.copy2(path, out / path.name)
 
     return 0
 
