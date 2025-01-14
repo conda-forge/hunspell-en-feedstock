@@ -7,7 +7,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/hunspell-en-fee
 About hunspell-en
 -----------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://extensions.libreoffice.org/en/extensions/show/english-dictionaries
 
 Package license: LGPL-3.0-or-later
 
