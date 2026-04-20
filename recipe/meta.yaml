@@ -5,8 +5,8 @@ package:
   version: {{ version.replace("-", ".") }}
 
 source:
-  url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/{{ version }}gb.tar.gz
-  sha256: 7a40044991daaa2bb8f26927f049f4205e54da665b71b73f85233a94ac24c515
+  url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/fc7121c7d2987d0f93931b0530a01e0a070c9dff.tar.gz
+  sha256: 232c7eec37e46abc68504b8b890f43e97fabf5e7dfd1332a158637db7bf2ee4c
 
 build:
   number: 1
