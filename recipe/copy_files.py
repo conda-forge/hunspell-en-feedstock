@@ -4,34 +4,32 @@ import sys
 from pathlib import Path
 
 SRC = Path(os.environ["SRC_DIR"])
-OUT = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
+OUT = Path(os.environ["PREFIX"]) / "share" / "hunspell_dictionaries"
 
 PKG = os.environ["PKG_NAME"]
-L10N = PKG.split("-")[-1].upper()
-PATH = sorted(SRC.glob(f"en_{L10N}*"))[0]
-GLOBS = ["*.aff", "*.dic"]
 
+INSTALL = {
+    "aoo-mozilla-en-dict-au": ["en_AU.aff", "en_AU.dic"],
+    "aoo-mozilla-en-dict-ca": ["en_CA.aff", "en_CA.dic"],
+    "aoo-mozilla-en-dict-gb": ["en_GB.aff", "en_GB.dic"],
+    "aoo-mozilla-en-dict-us": ["en_US.aff", "en_US.dic"],
+    "aoo-mozilla-en-dict-za": ["en_ZA.aff", "en_ZA.dic"],
+}
+
+def copy_verbose(src, dst):
+    print(f"Copying {src} to {dst}")
+    shutil.copy2(src, dst)
 
 def copy_files():
-    if not PATH.exists():
-        print(PATH, "does not exist")
-        return 1
-
-    print("\n".join(sorted(map(str, PATH.glob("*")))))
-
-    print("Copying files to", OUT)
-
-    dict_files = sorted(sum([[*PATH.glob(glob)] for glob in GLOBS], []))
-
-    if not dict_files:
-        PATH.glob("*")
-        return 1
-
     OUT.mkdir(exist_ok=True, parents=True)
 
-    for path in dict_files:
-        print("...", path.name)
-        shutil.copy2(path, OUT / path.name)
+    for path in INSTALL[PKG]:
+        copy_verbose(SRC / path, OUT / path)
+
+        # Older versions of en_GB installed as en-GB
+        if PKG == "aoo-mozilla-en-dict-gb":
+            copy_verbose(SRC / path, OUT / path.replace("_", "-"))
+
 
     return 0
 

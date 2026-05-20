@@ -1,15 +1,17 @@
-{% set version = "2024-03-01" %}
+{% set version = "2024.03.01" %}
 
 package:
   name: aoo-mozilla-en-dict
-  version: {{ version.replace("-", ".") }}
+  version: {{ version }}
 
 source:
-  url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/{{ version }}gb.tar.gz
-  sha256: 7a40044991daaa2bb8f26927f049f4205e54da665b71b73f85233a94ac24c515
+  url: https://extensions.libreoffice.org/assets/downloads/41/1709273668/dict-en-{{ version.replace(".", "") }}_lo.oxt
+  sha256: dd8e4fb6550ff5d84ff8dee48ef9b36868202691b19e014cd6271a2e0030aec1
+  # oxt filetype is a wrapper around zip
+  fn: dict-en-{{ version.replace(".", "") }}_lo.zip
 
 build:
-  number: 1
+  number: 2
   noarch: generic
   merge_build_host: False
   ignore_run_exports:
@@ -49,7 +51,7 @@ outputs:
     test: *test
     about:
       license: MIT
-      license_file: en_AU (Kevin Atkinson)/README_en_AU.txt
+      license_file: README_en_AU.txt
 
   - name: aoo-mozilla-en-dict-ca
     build: *build
@@ -57,14 +59,14 @@ outputs:
     test: *test
     about:
       license: MIT
-      license_file: en_CA (Kevin Atkinson)/README_en_CA.txt
+      license_file: README_en_CA.txt
 
   - name: aoo-mozilla-en-dict-gb
     build: *build
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
-      license_file: en_GB (Marco Pinto)/README_en_GB.txt
+      license_file: README_en_GB.txt
     test: *test
 
   - name: aoo-mozilla-en-dict-us
@@ -72,7 +74,7 @@ outputs:
     script: copy_files.py
     about:
       license: MIT
-      license_file: en_US (Kevin Atkinson)/README_en_US.txt
+      license_file: README_en_US.txt
     test: *test
 
   - name: aoo-mozilla-en-dict-za
@@ -80,14 +82,14 @@ outputs:
     script: copy_files.py
     about:
       license: LGPL-3.0-or-later
-      license_file: en_ZA (Dwayne Bailey)/README_en_ZA.txt
+      license_file: README_en_ZA.txt
     test: *test
 
 about:
-  home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+  home: https://extensions.libreoffice.org/en/extensions/show/english-dictionaries
   summary: 'English Dictionaries Project (AOO+Mozilla+others)'
   license: LGPL-3.0-or-later
-  license_file: README.md
+  license_file: lgpl-3.0.txt
 
 extra:
   feedstock-name: hunspell-en
