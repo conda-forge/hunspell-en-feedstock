@@ -8,7 +8,8 @@ from pytest import fixture, main
 
 PYTEST_ARGS = ["-s", "-vv", "--color=yes", __file__]
 
-OUT = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
+OUT = Path(os.environ["PREFIX"]) / "share/hunspell"
+OUT_LEGACY = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
 
 PKG = os.environ["PKG_NAME"]
 L10N = PKG.split("-")[-1].upper()
@@ -31,6 +32,7 @@ if L10N != "EN":
 
 def test_locale_found(a_locale: str):
     l10n_dict = OUT / a_locale
+    l10n_dict_legacy = OUT_LEGACY / a_locale
 
     l10n_paths = [OUT / f"{a_locale}.{ext}" for ext in EXTS]
 
@@ -45,7 +47,7 @@ def test_locale_found(a_locale: str):
 
     pprint.pprint(dicts)
 
-    assert str(l10n_dict) in dicts
+    assert str(l10n_dict) in dicts or str(l10n_dict_legacy) in dicts
 
 
 def test_correct_spelling(a_locale: str):
