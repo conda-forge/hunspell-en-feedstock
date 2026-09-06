@@ -3,6 +3,16 @@ schema_version: 1
 
 context:
   version: 2026.09.01
+  summary: "English Dictionaries Project (AOO+Mozilla+others)"
+  # localization paths and summary suffix
+  en_au: "en_AU (-ise) (alt)"
+  en_ca: "en_CA (mixed) (alt)"
+  en_gb: "en_GB (-ise)"
+  en_gb_oxendict: "en_GB (-ize) (Oxford)"
+  en_us: "en_US (-ize) (alt)"
+  en_za: "en_ZA (-ise)"
+  # legacy compatibility
+  gb_locales: en_GB en-GB
   # utilities
   share: ${{ "$PREFIX" if unix else "%PREFIX%" }}/share/hunspell_dictionaries
   mkdirp: ${{ "mkdir -p" if unix else "md" }}
@@ -40,7 +50,7 @@ outputs:
       - requirements: { run: [hunspell, pytest] }
         script:
           env:
-            CF_EN_LOCALES: AU CA GB GB-oxendict US ZA
+            CF_EN_LOCALES: en_AU en_CA ${{ gb_locales }} en_GB-oxendict en_US en_ZA
           file: test_hunspell.py
 
   # locales
@@ -48,59 +58,78 @@ outputs:
       name: aoo-mozilla-en-dict-au
     build:
       noarch: generic
-      script: cd "en_AU (-ise) (alt)" && ${{ cp_all }}
+      script: cd "${{ en_au }}" && ${{ cp_all }}
     tests:
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_au }}"
 
   - package:
       name: aoo-mozilla-en-dict-ca
     build:
       noarch: generic
-      script: cd "en_CA (mixed) (alt)" && ${{ cp_all }}
+      script: cd "${{ en_ca }}" && ${{ cp_all }}
     tests:
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_ca }}"
 
   - package:
       name: aoo-mozilla-en-dict-gb
     build:
       noarch: generic
-      script: cd "en_GB (-ise)" && ${{ cp_all }}
+      script:
+        - cd "${{ en_gb }}" && ${{ cp_all }}
+        # add legacy en-GB
+        - ${{ cp }} en_GB.dic ${{ share }}/en-GB.dic
+        - ${{ cp }} en_GB.aff ${{ share }}/en-GB.aff
     tests:
       - requirements: { run: [hunspell, pytest] }
-        script: { file: test_hunspell.py }
+        script:
+          env:
+            CF_EN_LOCALES: ${{ gb_locales }}
+          file: test_hunspell.py
+    about:
+      summary: "${{ summary }}: ${{ en_gb }}"
 
   - package:
       name: aoo-mozilla-en-dict-gb-oxendict
     build:
       noarch: generic
-      script: cd "en_GB (-ize) (Oxford)" && ${{ cp_all }}
+      script: cd "${{ en_gb_oxendict }}" && ${{ cp_all }}
     tests:
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_gb_oxendict }}"
 
   - package:
       name: aoo-mozilla-en-dict-us
     build:
       noarch: generic
-      script: cd "en_US (-ize) (alt)" && ${{ cp_all }}
+      script: cd "${{ en_us }}" && ${{ cp_all }}
     tests:
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_us }}"
 
   - package:
       name: aoo-mozilla-en-dict-za
     build:
       noarch: generic
-      script: cd "en_ZA (-ise)" && ${{ cp_all }}
+      script: cd "${{ en_za }}" && ${{ cp_all }}
     tests:
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_za }}"
 
 about:
   homepage: https://github.com/marcoagpinto/aoo-mozilla-en-dict
-  summary: "English Dictionaries Project (AOO+Mozilla+others)"
+  summary: ${{ summary }}
   license: LGPL-3.0-or-later
   license_file: LICENSE
 

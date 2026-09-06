@@ -17,11 +17,10 @@ LOCALES = os.environ.get("CF_EN_LOCALES", "").split()
 
 if not LOCALES:
     L10N = PKG.replace("aoo-mozilla-en-dict-", "").split("-")
-    LOCALES = ["-".join([L10N[0].upper(), *L10N[1:]])]
+    LOCALES = ["en_" + ("-".join([L10N[0].upper(), *L10N[1:]]))]
 
-
-SUFFIX_IS_MISSPELLED = {
-    "ize": ["en_AU", "en_GB", "en_ZA"],
+MISSPELLED_SUFFIX_LOCALES = {
+    "ize": ["en_AU", "en_GB", "en-GB", "en_ZA"],
     "ise": ["en_GB-oxendict", "en_US"],
 }
 
@@ -33,7 +32,7 @@ def test_locale_found(a_locale: str) -> None:
     l10n_paths = [OUT / f"{a_locale}.{ext}" for ext in EXTS]
 
     for path in l10n_paths:
-        print(f"Checking if {path} exists...")
+        print(f"\n\t... checking if {path} exists...")
         assert path.exists()
 
     print(f"\n\t... checking if the {a_locale} dictionary is detected...")
@@ -45,7 +44,7 @@ def test_locale_found(a_locale: str) -> None:
 
 @pytest.fixture(params=LOCALES)
 def a_locale(request: pytest.FixtureRequest) -> str:
-    return f"en_{request.param}"
+    return f"{request.param}"
 
 
 @pytest.mark.parametrize(
@@ -58,7 +57,7 @@ def a_locale(request: pytest.FixtureRequest) -> str:
     ],
 )
 def test_locale_spelling(a_locale: str, word: str, expected: str) -> None:
-    for suffix, suffix_locales in SUFFIX_IS_MISSPELLED.items():
+    for suffix, suffix_locales in MISSPELLED_SUFFIX_LOCALES.items():
         if word.endswith(suffix) and a_locale in suffix_locales:
             print(f"\n\t+++ -{suffix} should not be acceped with {a_locale}")
             expected = ""
@@ -80,4 +79,13 @@ def _dump_result(res: CompletedProcess[str]) -> None:
 
 
 if __name__ == "__main__":
+    print(f"""
+{"=" * 80}
+        testing {PKG} with:
+            locales:
+                {LOCALES}
+            pytest args:
+                {PYTEST_ARGS}
+{"=" * 80}
+    """)
     sys.exit(pytest.main(PYTEST_ARGS))
