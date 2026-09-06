@@ -26,14 +26,10 @@ outputs:
       noarch: generic
       script: ${{ cp }} "${{ en_au }}/*.aff" "${{ en_au }}/*.dic" "${{ PREFIX }}/${{ share }}"
     tests:
-      - requirements:
-          run: pytest
-        script:
-          file: test_hunspell
+      - {requirements: {run: [hunspell, pytest]}, script: {file: test_hunspell}}
 
   - package:
       name: hunspell-en
-    inherit: staging
     build:
       noarch: generic
     requirements:
@@ -44,7 +40,6 @@ outputs:
         # - aoo-mozilla-en-dict-gb
         # - aoo-mozilla-en-dict-us
         # - aoo-mozilla-en-dict-za
-    tests:
 
 about:
   homepage: https://github.com/marcoagpinto/aoo-mozilla-en-dict
