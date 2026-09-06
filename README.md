@@ -77,7 +77,7 @@ Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
-Summary: English Dictionaries Project (AOO+Mozilla+others)
+Summary: English Dictionaries Project (AOO+Mozilla+others): metapackage for all locales and hunspell
 
 Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
 
