@@ -128,7 +128,8 @@ outputs:
       summary: "${{ summary }}: ${{ en_za }}"
 
 about:
-  homepage: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+  homepage: https://marcoagpinto.com/#dictionaries_project
+  repository: https://github.com/marcoagpinto/aoo-mozilla-en-dict
   summary: ${{ summary }}
   license: LGPL-3.0-or-later
   license_file: LICENSE
