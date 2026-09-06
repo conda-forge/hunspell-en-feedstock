@@ -52,6 +52,8 @@ outputs:
           env:
             CF_EN_LOCALES: en_AU en_CA ${{ gb_locales }} en_GB-oxendict en_US en_ZA
           file: test_hunspell.py
+    about:
+      summary: "${{ summary }}: metapackage for all locales and hunspell"
 
   # locales
   - package:
