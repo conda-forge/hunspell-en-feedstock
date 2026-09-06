@@ -7,65 +7,79 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/hunspell-en-fee
 About hunspell-en
 -----------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
 Summary: English Dictionaries Project (AOO+Mozilla+others): en_AU (-ise) (alt)
 
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
 About aoo-mozilla-en-dict-ca
 ----------------------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
 Summary: English Dictionaries Project (AOO+Mozilla+others): en_CA (mixed) (alt)
 
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
 About aoo-mozilla-en-dict-gb
 ----------------------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
 Summary: English Dictionaries Project (AOO+Mozilla+others): en_GB (-ise)
 
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
 About aoo-mozilla-en-dict-gb-oxendict
 -------------------------------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
 Summary: English Dictionaries Project (AOO+Mozilla+others): en_GB (-ize) (Oxford)
 
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
 About aoo-mozilla-en-dict-us
 ----------------------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
 Summary: English Dictionaries Project (AOO+Mozilla+others): en_US (-ize) (alt)
 
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
 About aoo-mozilla-en-dict-za
 ----------------------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
 Summary: English Dictionaries Project (AOO+Mozilla+others): en_ZA (-ise)
 
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
 About hunspell-en
 -----------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
 Summary: English Dictionaries Project (AOO+Mozilla+others)
+
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
 
 Current build status
 ====================
