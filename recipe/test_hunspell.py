@@ -13,10 +13,17 @@ PKG = os.environ["PKG_NAME"]
 OUT = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
 EXTS = {"dic", "aff"}
 
-LOCALES = os.environ.get(
-    "CF_EN_LOCALES",
-    PKG.replace("aoo-mozilla-en-dict-", "").upper().replace("OXENDICT", "oxendict"),
-).split()
+LOCALES = os.environ.get("CF_EN_LOCALES", "").split()
+
+if not LOCALES:
+    L10N = PKG.replace("aoo-mozilla-en-dict-", "").split("-")
+    LOCALES = ["-".join([L10N[0].upper(), *L10N[1:]])]
+
+
+SUFFIX_IS_MISSPELLED = {
+    "ize": ["en_AU", "en_GB", "en_ZA"],
+    "ise": ["en_GB-oxendict", "en_US"],
+}
 
 
 def test_locale_found(a_locale: str) -> None:
@@ -46,11 +53,19 @@ def a_locale(request: pytest.FixtureRequest) -> str:
     [
         ("test", "test"),
         ("mispellled", ""),
+        ("parameterise", "parameterise"),
+        ("parameterize", "parameterize"),
     ],
 )
 def test_locale_spelling(a_locale: str, word: str, expected: str) -> None:
+    for suffix, suffix_locales in SUFFIX_IS_MISSPELLED.items():
+        if word.endswith(suffix) and a_locale in suffix_locales:
+            print(f"\n\t+++ -{suffix} should not be acceped with {a_locale}")
+            expected = ""
+            break
+
     args = ["hunspell", "-G", "-d", a_locale]
-    print(f"""\n\t... checking if {a_locale} return '{expected}' for '{word}':""")
+    print(f"""\n\t... checking if {a_locale} returns '{expected}' for '{word}':""")
     res = run(args, input=word, stdout=PIPE, stderr=PIPE, encoding="utf-8")
     _dump_result(res)
     out = res.stdout.strip()
@@ -58,9 +73,9 @@ def test_locale_spelling(a_locale: str, word: str, expected: str) -> None:
 
 
 def _dump_result(res: CompletedProcess[str]) -> None:
-    print("\targs:\n", "\t".join(res.args))
-    print("\tstdout:\n", indent(res.stdout, "\t\t"))
-    print("\tstderr:\n", indent(res.stderr, "\t\t"))
+    print("\targs:\n\t\t", "\t".join(res.args))
+    print("\tstdout:\n", indent(res.stdout or "<EMPTY>", "\t\t"))
+    print("\tstderr:\n", indent(res.stderr or "<EMPTY>", "\t\t"))
     print("\trc:", res.returncode)
 
 
