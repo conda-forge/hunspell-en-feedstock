@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: 2026.09.01
+  share: share/hunspell_dictionaries
+  cp: ${{ "cp -r" if unix else "copy" }}
+  en_au: en_AU (-ise) (alt)
+
+recipe:
+  name: aoo-mozilla-en-dict
+  version: ${{ version }}
+
+source:
+  url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/${{ version }}.tar.gz
+  sha256: d3adb33fd3adb33fd3adb33fd3adb33fd3adb33fd3adb33fd3adb33fd3adb33f
+
+build:
+  number: 0
+  noarch: generic
+
+outputs:
+  - package:
+      name: aoo-mozilla-en-dict-au
+    build:
+      noarch: generic
+      script: ${{ cp }} "${{ en_au }}/*.aff" "${{ en_au }}/*.dic" "${{ PREFIX }}/${{ share }}"
+    tests:
+      - requirements:
+          run: pytest
+        script:
+          file: test_hunspell
+
+  - package:
+      name: hunspell-en
+    inherit: staging
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - hunspell
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-au", exact=True) }}
+        # - aoo-mozilla-en-dict-ca
+        # - aoo-mozilla-en-dict-gb
+        # - aoo-mozilla-en-dict-us
+        # - aoo-mozilla-en-dict-za
+    tests:
+
+about:
+  homepage: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+  summary: 'English Dictionaries Project (AOO+Mozilla+others)'
+  license: LGPL-3.0-or-later
+  license_file: LICENSE
+
+extra:
+  feedstock-name: hunspell-en
+  recipe-maintainers:
+    - scopatz
+    - bollwyvl
