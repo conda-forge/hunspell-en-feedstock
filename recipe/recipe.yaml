@@ -3,9 +3,11 @@ schema_version: 1
 
 context:
   version: 2026.09.01
-  share: share/hunspell_dictionaries
-  cp: ${{ "cp -r" if unix else "copy" }}
-  en_au: en_AU (-ise) (alt)
+  # utilities
+  share: ${{ "$PREFIX" if unix else "%PREFIX%" }}/share/hunspell_dictionaries
+  mkdirp: ${{ "mkdir -p" if unix else "md" }}
+  cp: ${{ "cp" if unix else "copy" }}
+  cp_all: ${{ mkdirp }} "${{ share }}" && ${{ cp }} *.aff *.dic "${{ share }}"
 
 recipe:
   name: aoo-mozilla-en-dict
@@ -13,21 +15,14 @@ recipe:
 
 source:
   url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/${{ version }}.tar.gz
-  sha256: d3adb33fd3adb33fd3adb33fd3adb33fd3adb33fd3adb33fd3adb33fd3adb33f
+  sha256: 68349bfc36a17bddb16f8fde63fa10f5cf82f1e6c7b21393d3389e303cf2d97d
 
 build:
   number: 0
   noarch: generic
 
 outputs:
-  - package:
-      name: aoo-mozilla-en-dict-au
-    build:
-      noarch: generic
-      script: ${{ cp }} "${{ en_au }}/*.aff" "${{ en_au }}/*.dic" "${{ PREFIX }}/${{ share }}"
-    tests:
-      - {requirements: {run: [hunspell, pytest]}, script: {file: test_hunspell}}
-
+  # metapackage
   - package:
       name: hunspell-en
     build:
@@ -36,14 +31,76 @@ outputs:
       run:
         - hunspell
         - ${{ pin_subpackage("aoo-mozilla-en-dict-au", exact=True) }}
-        # - aoo-mozilla-en-dict-ca
-        # - aoo-mozilla-en-dict-gb
-        # - aoo-mozilla-en-dict-us
-        # - aoo-mozilla-en-dict-za
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-ca", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-gb", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-gb-oxendict", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-us", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-za", exact=True) }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script:
+          env:
+            CF_EN_LOCALES: AU CA GB GB-oxendict US ZA
+          file: test_hunspell.py
+
+  # locales
+  - package:
+      name: aoo-mozilla-en-dict-au
+    build:
+      noarch: generic
+      script: cd "en_AU (-ise) (alt)" && ${{ cp_all }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+
+  - package:
+      name: aoo-mozilla-en-dict-ca
+    build:
+      noarch: generic
+      script: cd "en_CA (mixed) (alt)" && ${{ cp_all }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+
+  - package:
+      name: aoo-mozilla-en-dict-gb
+    build:
+      noarch: generic
+      script: cd "en_GB (-ise)" && ${{ cp_all }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+
+  - package:
+      name: aoo-mozilla-en-dict-gb-oxendict
+    build:
+      noarch: generic
+      script: cd "en_GB (-ize) (Oxford)" && ${{ cp_all }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+
+  - package:
+      name: aoo-mozilla-en-dict-us
+    build:
+      noarch: generic
+      script: cd "en_US (-ize) (alt)" && ${{ cp_all }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+
+  - package:
+      name: aoo-mozilla-en-dict-za
+    build:
+      noarch: generic
+      script: cd "en_ZA (-ise)" && ${{ cp_all }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
 
 about:
   homepage: https://github.com/marcoagpinto/aoo-mozilla-en-dict
-  summary: 'English Dictionaries Project (AOO+Mozilla+others)'
+  summary: "English Dictionaries Project (AOO+Mozilla+others)"
   license: LGPL-3.0-or-later
   license_file: LICENSE
 
