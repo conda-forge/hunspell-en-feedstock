@@ -10,7 +10,7 @@ import pytest
 PYTEST_ARGS = [__file__, "-s", "-vv", "--color=yes"]
 
 PKG = os.environ["PKG_NAME"]
-OUT = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
+OUT = Path(os.environ["PREFIX"]) / "share/hunspell"
 EXTS = {"dic", "aff"}
 
 LOCALES = os.environ.get("CF_EN_LOCALES", "").split()

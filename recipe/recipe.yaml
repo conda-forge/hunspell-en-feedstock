@@ -14,7 +14,7 @@ context:
   # legacy compatibility
   gb_locales: en_GB en-GB
   # utilities
-  share: ${{ "$PREFIX" if unix else "%PREFIX%" }}/share/hunspell_dictionaries
+  share: ${{ "$PREFIX" if unix else "%PREFIX%" }}/share/hunspell
   mkdirp: ${{ "mkdir -p" if unix else "md" }}
   cp: ${{ "cp" if unix else "copy" }}
   cp_all: ${{ mkdirp }} "${{ share }}" && ${{ cp }} *.aff *.dic "${{ share }}"
@@ -39,7 +39,8 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - hunspell
+        # hunspell <1.7.3 used used the legacy `PREFIX/share/hunspell_dictionaries`
+        - hunspell >=1.7.3
         - ${{ pin_subpackage("aoo-mozilla-en-dict-au", exact=True) }}
         - ${{ pin_subpackage("aoo-mozilla-en-dict-ca", exact=True) }}
         - ${{ pin_subpackage("aoo-mozilla-en-dict-gb", exact=True) }}
