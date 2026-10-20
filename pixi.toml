@@ -5,7 +5,7 @@
 
 [workspace]
 name = "hunspell-en-feedstock"
-version = "2026.9.10"  # conda-smithy version used to generate this file
+version = "2026.10.20"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/hunspell-en-feedstock"
 authors = ["@conda-forge/hunspell-en"]
 channels = ["conda-forge"]
