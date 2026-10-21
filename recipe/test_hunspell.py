@@ -1,73 +1,91 @@
 import os
-import pprint
-import subprocess
 import sys
+
 from pathlib import Path
+from subprocess import run, PIPE, CompletedProcess
+from textwrap import indent
 
-from pytest import fixture, main
+import pytest
 
-PYTEST_ARGS = ["-s", "-vv", "--color=yes", __file__]
-
-OUT = Path(os.environ["PREFIX"]) / "share/hunspell_dictionaries"
+PYTEST_ARGS = [__file__, "-s", "-vv", "--color=yes"]
 
 PKG = os.environ["PKG_NAME"]
-L10N = PKG.split("-")[-1].upper()
-HUNSPELL_ARGS = ["hunspell", "-G"]
-EXTS = ["dic", "aff"]
+OUT = Path(os.environ["PREFIX"]) / "share/hunspell"
+EXTS = {"dic", "aff"}
 
-L10N_SEPARATOR = {
-    "AU": "_",
-    "CA": "_",
-    "GB": "-",
-    "US": "_",
-    "ZA": "_",
+LOCALES = os.environ.get("CF_EN_LOCALES", "").split()
+
+if not LOCALES:
+    L10N = PKG.replace("aoo-mozilla-en-dict-", "").split("-")
+    LOCALES = ["en_" + ("-".join([L10N[0].upper(), *L10N[1:]]))]
+
+MISSPELLED_SUFFIX_LOCALES = {
+    "ize": ["en_AU", "en_GB", "en-GB", "en_ZA"],
+    "ise": ["en_GB-oxendict", "en_US"],
 }
 
-LOCALES = [f"en{sep}{l10n}" for l10n, sep in L10N_SEPARATOR.items()]
 
-if L10N != "EN":
-    LOCALES = [f"en{L10N_SEPARATOR[L10N]}{L10N}"]
-
-
-def test_locale_found(a_locale: str):
+def test_locale_found(a_locale: str) -> None:
+    """Verify whether the dictionary is found."""
     l10n_dict = OUT / a_locale
 
     l10n_paths = [OUT / f"{a_locale}.{ext}" for ext in EXTS]
 
     for path in l10n_paths:
-        print(f"Checking if {path} exists...")
+        print(f"\n\t... checking if {path} exists...")
         assert path.exists()
 
-    print(f"Checking if the {a_locale} dictionary is detected...")
-    p = subprocess.Popen(["hunspell", "-D"], stderr=subprocess.PIPE)
-    out, err = p.communicate()
-    dicts = err.decode("utf-8")
-
-    pprint.pprint(dicts)
-
-    assert str(l10n_dict) in dicts
+    print(f"\n\t... checking if the {a_locale} dictionary is detected...")
+    res = run(["hunspell", "-D"], stderr=PIPE, stdout=PIPE, encoding="utf-8")
+    _dump_result(res)
+    out = res.stderr.strip().splitlines()
+    assert str(l10n_dict) in out, out
 
 
-def test_correct_spelling(a_locale: str):
-    hunspell("test", "test", a_locale)
+@pytest.fixture(params=LOCALES)
+def a_locale(request: pytest.FixtureRequest) -> str:
+    return f"{request.param}"
 
 
-def test_not_correct_spelling(a_locale: str):
-    hunspell("mispellled", "", a_locale)
+@pytest.mark.parametrize(
+    ("word", "expected"),
+    [
+        ("test", "test"),
+        ("mispellled", ""),
+        ("parameterise", "parameterise"),
+        ("parameterize", "parameterize"),
+    ],
+)
+def test_locale_spelling(a_locale: str, word: str, expected: str) -> None:
+    for suffix, suffix_locales in MISSPELLED_SUFFIX_LOCALES.items():
+        if word.endswith(suffix) and a_locale in suffix_locales:
+            print(f"\n\t+++ -{suffix} should not be acceped with {a_locale}")
+            expected = ""
+            break
+
+    args = ["hunspell", "-G", "-d", a_locale]
+    print(f"""\n\t... checking if {a_locale} returns '{expected}' for '{word}':""")
+    res = run(args, input=word, stdout=PIPE, stderr=PIPE, encoding="utf-8")
+    _dump_result(res)
+    out = res.stdout.strip()
+    assert out == expected, out
 
 
-@fixture(params=LOCALES)
-def a_locale(request) -> str:
-    return request.param
-
-
-def hunspell(word: str, expected: str, locale: str):
-    args = HUNSPELL_ARGS + ["-d", locale]
-    print(f"Checking if the output of `{args}` for `{word}` is `{expected}`...")
-    p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    out, err = p.communicate(word.encode("utf-8"))
-    assert out.decode("utf-8").strip() == expected, out
+def _dump_result(res: CompletedProcess[str]) -> None:
+    print("\targs:\n\t\t", "\t".join(res.args))
+    print("\tstdout:\n", indent(res.stdout or "<EMPTY>", "\t\t"))
+    print("\tstderr:\n", indent(res.stderr or "<EMPTY>", "\t\t"))
+    print("\trc:", res.returncode)
 
 
 if __name__ == "__main__":
-    sys.exit(main(PYTEST_ARGS))
+    print(f"""
+{"=" * 80}
+        testing {PKG} with:
+            locales:
+                {LOCALES}
+            pytest args:
+                {PYTEST_ARGS}
+{"=" * 80}
+    """)
+    sys.exit(pytest.main(PYTEST_ARGS))

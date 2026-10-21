@@ -7,55 +7,89 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/hunspell-en-fee
 About hunspell-en
 -----------------
 
-Home: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
 
-Summary: English Dictionaries Project (AOO+Mozilla+others)
+Summary: English Dictionaries Project (AOO+Mozilla+others): en_AU (-ise) (alt)
 
-About aoo-mozilla-en-dict-au
-----------------------------
-
-
-
-Package license: MIT
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
 
 About aoo-mozilla-en-dict-ca
 ----------------------------
 
+Home: https://marcoagpinto.com/#dictionaries_project
 
+Package license: LGPL-3.0-or-later
 
-Package license: MIT
+Summary: English Dictionaries Project (AOO+Mozilla+others): en_CA (mixed) (alt)
+
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
 
 About aoo-mozilla-en-dict-gb
 ----------------------------
 
-
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
+
+Summary: English Dictionaries Project (AOO+Mozilla+others): en_GB (-ise)
+
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
+About aoo-mozilla-en-dict-gb-oxendict
+-------------------------------------
+
+Home: https://marcoagpinto.com/#dictionaries_project
+
+Package license: LGPL-3.0-or-later
+
+Summary: English Dictionaries Project (AOO+Mozilla+others): en_GB (-ize) (Oxford)
+
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
 
 About aoo-mozilla-en-dict-us
 ----------------------------
 
+Home: https://marcoagpinto.com/#dictionaries_project
 
+Package license: LGPL-3.0-or-later
 
-Package license: MIT
+Summary: English Dictionaries Project (AOO+Mozilla+others): en_US (-ize) (alt)
+
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
 
 About aoo-mozilla-en-dict-za
 ----------------------------
 
-
+Home: https://marcoagpinto.com/#dictionaries_project
 
 Package license: LGPL-3.0-or-later
+
+Summary: English Dictionaries Project (AOO+Mozilla+others): en_ZA (-ise)
+
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+
+About hunspell-en
+-----------------
+
+Home: https://marcoagpinto.com/#dictionaries_project
+
+Package license: LGPL-3.0-or-later
+
+Summary: English Dictionaries Project (AOO+Mozilla+others): metapackage for all locales and hunspell
+
+Development: https://github.com/marcoagpinto/aoo-mozilla-en-dict
 
 Current build status
 ====================
 
 
-<table><tr><td>All platforms:</td>
+<table><tr>
+    <td>All platforms:</td>
     <td>
-      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5597&branchName=main">
-        <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/hunspell-en-feedstock?branchName=main">
+      <a href="https://github.com/conda-forge/hunspell-en-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/hunspell-en-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
       </a>
     </td>
   </tr>
@@ -69,6 +103,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-aoo--mozilla--en--dict--au-green.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-au) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/aoo-mozilla-en-dict-au.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-au) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/aoo-mozilla-en-dict-au.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-au) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/aoo-mozilla-en-dict-au.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-au) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-aoo--mozilla--en--dict--ca-green.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-ca) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/aoo-mozilla-en-dict-ca.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-ca) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/aoo-mozilla-en-dict-ca.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-ca) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/aoo-mozilla-en-dict-ca.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-ca) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-aoo--mozilla--en--dict--gb-green.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/aoo-mozilla-en-dict-gb.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/aoo-mozilla-en-dict-gb.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/aoo-mozilla-en-dict-gb.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-aoo--mozilla--en--dict--gb--oxendict-green.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb-oxendict) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/aoo-mozilla-en-dict-gb-oxendict.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb-oxendict) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/aoo-mozilla-en-dict-gb-oxendict.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb-oxendict) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/aoo-mozilla-en-dict-gb-oxendict.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-gb-oxendict) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-aoo--mozilla--en--dict--us-green.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-us) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/aoo-mozilla-en-dict-us.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-us) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/aoo-mozilla-en-dict-us.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-us) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/aoo-mozilla-en-dict-us.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-us) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-aoo--mozilla--en--dict--za-green.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/aoo-mozilla-en-dict-za.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/aoo-mozilla-en-dict-za.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/aoo-mozilla-en-dict-za.svg)](https://anaconda.org/conda-forge/aoo-mozilla-en-dict-za) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-hunspell--en-green.svg)](https://anaconda.org/conda-forge/hunspell-en) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/hunspell-en.svg)](https://anaconda.org/conda-forge/hunspell-en) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/hunspell-en.svg)](https://anaconda.org/conda-forge/hunspell-en) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/hunspell-en.svg)](https://anaconda.org/conda-forge/hunspell-en) |
@@ -83,31 +118,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `aoo-mozilla-en-dict-au, aoo-mozilla-en-dict-ca, aoo-mozilla-en-dict-gb, aoo-mozilla-en-dict-us, aoo-mozilla-en-dict-za, hunspell-en` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
-conda install aoo-mozilla-en-dict-au aoo-mozilla-en-dict-ca aoo-mozilla-en-dict-gb aoo-mozilla-en-dict-us aoo-mozilla-en-dict-za hunspell-en
+conda install aoo-mozilla-en-dict-au aoo-mozilla-en-dict-ca aoo-mozilla-en-dict-gb aoo-mozilla-en-dict-gb-oxendict aoo-mozilla-en-dict-us aoo-mozilla-en-dict-za hunspell-en
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
-mamba install aoo-mozilla-en-dict-au aoo-mozilla-en-dict-ca aoo-mozilla-en-dict-gb aoo-mozilla-en-dict-us aoo-mozilla-en-dict-za hunspell-en
+mamba install aoo-mozilla-en-dict-au aoo-mozilla-en-dict-ca aoo-mozilla-en-dict-gb aoo-mozilla-en-dict-gb-oxendict aoo-mozilla-en-dict-us aoo-mozilla-en-dict-za hunspell-en
 ```
 
-It is possible to list all of the versions of `aoo-mozilla-en-dict-au` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add aoo-mozilla-en-dict-au aoo-mozilla-en-dict-ca aoo-mozilla-en-dict-gb aoo-mozilla-en-dict-gb-oxendict aoo-mozilla-en-dict-us aoo-mozilla-en-dict-za hunspell-en
+# for installing globally
+pixi global install aoo-mozilla-en-dict-au aoo-mozilla-en-dict-ca aoo-mozilla-en-dict-gb aoo-mozilla-en-dict-gb-oxendict aoo-mozilla-en-dict-us aoo-mozilla-en-dict-za hunspell-en
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `aoo-mozilla-en-dict-au` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search aoo-mozilla-en-dict-au --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search aoo-mozilla-en-dict-au --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search aoo-mozilla-en-dict-au --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -119,6 +196,9 @@ mamba repoquery whoneeds aoo-mozilla-en-dict-au --channel conda-forge
 # List dependencies of `aoo-mozilla-en-dict-au`:
 mamba repoquery depends aoo-mozilla-en-dict-au --channel conda-forge
 ```
+
+</details>
+
 
 
 About conda-forge
@@ -135,19 +215,17 @@ for each of the installable packages. Such a repository is known as a *feedstock
 A feedstock is made up of a conda recipe (the instructions on what and how to build
 the package) and the necessary configurations for automatic building using freely
 available continuous integration services. Thanks to the awesome service provided by
-[Azure](https://azure.microsoft.com/en-us/services/devops/), [GitHub](https://github.com/),
-[CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
-[Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
+[Azure](https://azure.microsoft.com/en-us/services/devops/) and [GitHub](https://github.com/)
 it is possible to build and upload installable packages to the
 [conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
 
-To manage the continuous integration and simplify feedstock maintenance
+To manage the continuous integration and simplify feedstock maintenance,
 [conda-smithy](https://github.com/conda-forge/conda-smithy) has been developed.
 Using the ``conda-forge.yml`` within this repository, it is possible to re-render all of
 this feedstock's supporting files (e.g. the CI configuration files) with ``conda smithy rerender``.
 
-For more information please check the [conda-forge documentation](https://conda-forge.org/docs/).
+For more information, please check the [conda-forge documentation](https://conda-forge.org/docs/).
 
 Terminology
 ===========
@@ -174,7 +252,7 @@ merged, the recipe will be re-built and uploaded automatically to the
 everybody to install and use from the `conda-forge` channel.
 Note that all branches in the conda-forge/hunspell-en-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
-on branches in forks and branches in the main repository should only be used to
+on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.
 
 In order to produce a uniquely identifiable distribution:

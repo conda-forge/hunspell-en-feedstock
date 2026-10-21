@@ -1,0 +1,160 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: 2026.09.01
+  summary: "English Dictionaries Project (AOO+Mozilla+others)"
+  # see https://github.com/conda-forge/hunspell-feedstock/issues/12
+  # hunspell <1.7.5 used the legacy `PREFIX/share/hunspell_dictionaries`
+  hunspell_min: hunspell >=1.7.5
+  # localization paths and summary suffix
+  en_au: "en_AU (-ise) (alt)"
+  en_ca: "en_CA (mixed) (alt)"
+  en_gb: "en_GB (-ise)"
+  en_gb_oxendict: "en_GB (-ize) (Oxford)"
+  en_us: "en_US (-ize) (alt)"
+  en_za: "en_ZA (-ise)"
+  # legacy compatibility
+  gb_locales: en_GB en-GB
+  # utilities
+  slash: ${{ "/" if unix else "\\" }}
+  share_stem: share/hunspell
+  share: ${{ "$PREFIX" if unix else "%PREFIX%" }}${{ slash }}${{ share_stem | replace("/", slash) }}
+  mkdirp: ${{ "mkdir -p" if unix else "md" }}
+  cp: ${{ "cp" if unix else "copy" }}
+  cp_all: ${{ mkdirp }} "${{ share }}" && ${{ cp }} *.aff *.dic "${{ share }}"
+
+recipe:
+  name: aoo-mozilla-en-dict
+  version: ${{ version }}
+
+source:
+  url: https://github.com/marcoagpinto/aoo-mozilla-en-dict/archive/${{ version }}.tar.gz
+  sha256: 68349bfc36a17bddb16f8fde63fa10f5cf82f1e6c7b21393d3389e303cf2d97d
+
+build:
+  number: 0
+  noarch: generic
+
+outputs:
+  # metapackage
+  - package:
+      name: hunspell-en
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - hunspell
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-au", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-ca", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-gb", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-gb-oxendict", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-us", exact=True) }}
+        - ${{ pin_subpackage("aoo-mozilla-en-dict-za", exact=True) }}
+    tests:
+      - requirements: { run: [hunspell, pytest] }
+        script:
+          env:
+            CF_EN_LOCALES: en_AU en_CA ${{ gb_locales }} en_GB-oxendict en_US en_ZA
+          file: test_hunspell.py
+    about:
+      summary: "${{ summary }}: metapackage for all locales and hunspell"
+
+  # locales
+  - package:
+      name: aoo-mozilla-en-dict-au
+    build:
+      noarch: generic
+      script: cd "${{ en_au }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
+    tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_AU.{dic,aff}"]}
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_au }}"
+
+  - package:
+      name: aoo-mozilla-en-dict-ca
+    build:
+      noarch: generic
+      script: cd "${{ en_ca }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
+    tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_CA.{dic,aff}"]}
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_ca }}"
+
+  - package:
+      name: aoo-mozilla-en-dict-gb
+    build:
+      noarch: generic
+      script:
+        - cd "${{ en_gb }}" && ${{ cp_all }}
+        # add legacy en-GB
+        - ${{ cp }} en_GB.dic ${{ share }}/en-GB.dic
+        - ${{ cp }} en_GB.aff ${{ share }}/en-GB.aff
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
+    tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en?GB.{dic,aff}"]}
+      - requirements: { run: [hunspell, pytest] }
+        script:
+          env:
+            CF_EN_LOCALES: ${{ gb_locales }}
+          file: test_hunspell.py
+    about:
+      summary: "${{ summary }}: ${{ en_gb }}"
+
+  - package:
+      name: aoo-mozilla-en-dict-gb-oxendict
+    build:
+      noarch: generic
+      script: cd "${{ en_gb_oxendict }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
+    tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_GB-oxendict.{dic,aff}"]}
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_gb_oxendict }}"
+
+  - package:
+      name: aoo-mozilla-en-dict-us
+    build:
+      noarch: generic
+      script: cd "${{ en_us }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
+    tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_US.{dic,aff}"]}
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_us }}"
+
+  - package:
+      name: aoo-mozilla-en-dict-za
+    build:
+      noarch: generic
+      script: cd "${{ en_za }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
+    tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_ZA.{dic,aff}"]}
+      - requirements: { run: [hunspell, pytest] }
+        script: { file: test_hunspell.py }
+    about:
+      summary: "${{ summary }}: ${{ en_za }}"
+
+about:
+  homepage: https://marcoagpinto.com/#dictionaries_project
+  repository: https://github.com/marcoagpinto/aoo-mozilla-en-dict
+  summary: ${{ summary }}
+  license: LGPL-3.0-or-later
+  license_file: LICENSE
+
+extra:
+  feedstock-name: hunspell-en
+  recipe-maintainers:
+    - scopatz
+    - bollwyvl
