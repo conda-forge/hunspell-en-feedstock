@@ -4,6 +4,9 @@ schema_version: 1
 context:
   version: 2026.09.01
   summary: "English Dictionaries Project (AOO+Mozilla+others)"
+  # see https://github.com/conda-forge/hunspell-feedstock/issues/12
+  # hunspell <1.7.5 used the legacy `PREFIX/share/hunspell_dictionaries`
+  hunspell_min: hunspell >=1.7.5
   # localization paths and summary suffix
   en_au: "en_AU (-ise) (alt)"
   en_ca: "en_CA (mixed) (alt)"
@@ -14,7 +17,9 @@ context:
   # legacy compatibility
   gb_locales: en_GB en-GB
   # utilities
-  share: ${{ "$PREFIX" if unix else "%PREFIX%" }}/share/hunspell
+  slash: ${{ "/" if unix else "\\" }}
+  share_stem: share/hunspell
+  share: ${{ "$PREFIX" if unix else "%PREFIX%" }}${{ slash }}${{ share_stem | replace("/", slash) }}
   mkdirp: ${{ "mkdir -p" if unix else "md" }}
   cp: ${{ "cp" if unix else "copy" }}
   cp_all: ${{ mkdirp }} "${{ share }}" && ${{ cp }} *.aff *.dic "${{ share }}"
@@ -39,8 +44,7 @@ outputs:
       noarch: generic
     requirements:
       run:
-        # hunspell <1.7.3 used used the legacy `PREFIX/share/hunspell_dictionaries`
-        - hunspell >=1.7.3
+        - hunspell
         - ${{ pin_subpackage("aoo-mozilla-en-dict-au", exact=True) }}
         - ${{ pin_subpackage("aoo-mozilla-en-dict-ca", exact=True) }}
         - ${{ pin_subpackage("aoo-mozilla-en-dict-gb", exact=True) }}
@@ -62,7 +66,9 @@ outputs:
     build:
       noarch: generic
       script: cd "${{ en_au }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
     tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_AU.{dic,aff}"]}
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
     about:
@@ -73,7 +79,9 @@ outputs:
     build:
       noarch: generic
       script: cd "${{ en_ca }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
     tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_CA.{dic,aff}"]}
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
     about:
@@ -88,7 +96,9 @@ outputs:
         # add legacy en-GB
         - ${{ cp }} en_GB.dic ${{ share }}/en-GB.dic
         - ${{ cp }} en_GB.aff ${{ share }}/en-GB.aff
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
     tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en?GB.{dic,aff}"]}
       - requirements: { run: [hunspell, pytest] }
         script:
           env:
@@ -102,7 +112,9 @@ outputs:
     build:
       noarch: generic
       script: cd "${{ en_gb_oxendict }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
     tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_GB-oxendict.{dic,aff}"]}
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
     about:
@@ -113,7 +125,9 @@ outputs:
     build:
       noarch: generic
       script: cd "${{ en_us }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
     tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_US.{dic,aff}"]}
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
     about:
@@ -124,7 +138,9 @@ outputs:
     build:
       noarch: generic
       script: cd "${{ en_za }}" && ${{ cp_all }}
+    requirements: {run_constraints: ["${{ hunspell_min }}"]}
     tests:
+      - package_contents: {strict: true, files: ["${{ share_stem }}/en_ZA.{dic,aff}"]}
       - requirements: { run: [hunspell, pytest] }
         script: { file: test_hunspell.py }
     about:
